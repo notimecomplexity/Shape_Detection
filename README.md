@@ -4,8 +4,13 @@
 To sketch our outlines, we combine two different edge detection functions with `cv2.bitwise_or()`.
 
 1. Detect smooth regions with `detect_gray()`
-<img width="1487" height="887" alt="detect_gray()" src="https://github.com/user-attachments/assets/882fe0f7-5c17-45b4-aa62-76d815ae7d2a" />
-- This function converts a frame into **Grayscale**, applies a **Median Blur**, averages **Difference in Texture** over a 9x9 neighborhood (small = dark, large = light) between non-blurred and blurred, selects smooth (dark) regions, and cleans their boundaries. 
+<img width="1487" height="887" alt="Gray Process" src="https://github.com/user-attachments/assets/7acaac9c-0d38-4105-9502-fb728ee23da2" />
+
+- This function converts a frame into **Grayscale**, applies a **Median Blur**, averages **Difference in Texture** over a 9x9 neighborhood (small = dark, large = light) between non-blurred and blurred, selects smooth (dark) regions, and cleans their boundaries.
+
+<img width="1624" height="997" alt="Gray Final" src="https://github.com/user-attachments/assets/87d4a9a2-b3eb-4420-b96c-e670b6e3f1fd" />
+
+- Each shape's rough outline is captured, but the accuracy could be improved. To accomplish this, we declare a second function `detect_colour()`.
 
 ## Task Overview:
 
