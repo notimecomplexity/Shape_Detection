@@ -1,7 +1,6 @@
 # frame → smooth → edges → connect gaps → candidate contours
 #       → score candidates → accepted regions → contours and centroids
 
-from tkinter import N
 import cv2
 import numpy as np
 
@@ -14,7 +13,7 @@ FY = 2569.70273111 # ideally, FX = FY
 CX = 0.0
 CY = 0.0 # optical axis passes through origin of image coordinate system
 
-CIRCLE_RADIUS_IN = 10.0 # radius of orange circle, measured in inches
+# CIRCLE_RADIUS_IN = 10.0 # radius of orange circle, measured in inches
 
 validated_depths = [
     238.37928273271842,
@@ -269,24 +268,6 @@ def main():
     if not cap.isOpened():
         raise RuntimeError("Could not open video source.")
 
-    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = cap.get(cv2.CAP_PROP_FPS)
-
-    if not np.isfinite(fps) or fps <= 0:
-        fps = 30.0
-
-    out = cv2.VideoWriter(
-        "Part_4_output.mp4",
-        cv2.VideoWriter_fourcc(*"mp4v"),
-        fps,
-        (width, height),
-    )
-
-    if not out.isOpened():
-        cap.release()
-        raise RuntimeError("Could not open output video writer.")
-
     try:
         while True:
             ret, frame = cap.read()
@@ -298,13 +279,11 @@ def main():
             # cv2.imshow("Detect Colour", c_ov) # debugging for detect_colour
             combined_edges = cv2.bitwise_or(g_ou, c_ou)
             final = find_com(frame, combined_edges)
-            out.write(final)
             cv2.imshow("Video Analysis Stream", final)
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
     finally:
         cap.release()
-        out.release()
         cv2.destroyAllWindows()
 
 
