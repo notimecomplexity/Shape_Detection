@@ -1,4 +1,4 @@
-# Penn Aerial Robotics (PennAIR) Software Challenge
+# Penn Aerial Robotics (PennAiR) Software Challenge
 
 ## Task Overview:
 
