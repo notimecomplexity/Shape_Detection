@@ -9,9 +9,8 @@
 https://github.com/user-attachments/assets/e1292e93-dd82-431b-986f-c9e9a1644195
 
 ### Part 3: Background Agnostic Algorithm
-https://github.com/user-attachments/assets/ec83fe15-dfc8-4c8c-bf1d-4c125e0649df
+https://github.com/user-attachments/assets/2f1050c2-9ce6-41c6-8190-407471c2a60e
 
 ### Part 4: Make it 3D
-https://github.com/user-attachments/assets/24b42cbd-1786-4d43-bba7-4d2403f8d4ce
-
+https://github.com/user-attachments/assets/5ae24443-24a6-4b41-8521-698efc411494
 
