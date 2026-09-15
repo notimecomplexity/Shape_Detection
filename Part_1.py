@@ -32,9 +32,9 @@ for i, cnt in enumerate(contours):
 
     cv2.drawContours(out, [cnt], -1, (255, 255, 255), 2)
     cv2.circle(out, (cx, cy), 5, (0, 0, 0), -1)
-    cv2.putText(out, f"{cx}, {cy}", (cx, cy - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
+    cv2.putText(out, f"{cx}, {cy}", (cx, cy - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 2)
 
-# cv2.imshow("Canny Edge Detection", edges)
+# cv2.imshow("Canny Edge Detection", edges) # for debugging
 cv2.imshow("Centers of Mass", out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

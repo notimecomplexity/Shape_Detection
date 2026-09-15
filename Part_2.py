@@ -10,7 +10,6 @@ COLOR_RANGES = {
     "green": [((48, 160, 140), (56, 215, 190))],
 }
 
-
 def detect_shapes(frame):
     """Detect visible colored regions using only the current frame."""
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
