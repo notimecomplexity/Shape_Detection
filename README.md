@@ -4,7 +4,7 @@
 - [Task Overview](#task-overview)
 - [The Outline](#the-outline)
 
-## Task Overview:
+## Task Overview
 
 ### Part 1: Shape Detection on Static Image
 <img width="960" height="540" alt="Part_1" src="https://github.com/user-attachments/assets/695e3ef8-e2a3-49e9-a738-47a3235e8577" />
@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/2f1050c2-9ce6-41c6-8190-407471c2a60e
 ### Part 4: Make it 3D
 https://github.com/user-attachments/assets/5ae24443-24a6-4b41-8521-698efc411494
 
-## The Outline:
+## The Outline
 To sketch our outlines, we combine two different edge detection functions with `cv2.bitwise_or()`.
 
 1. Detect smooth regions with `detect_gray()`
