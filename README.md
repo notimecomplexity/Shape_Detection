@@ -70,8 +70,8 @@ Performing `cv2.bitwise_or()` on the results of `detect_gray()` and `detect_colo
 
       | $$n$$ | 10 | 20 | 30 |
       |----------|----------|----------|----------|
-      | **Median $$Z$$** | 238.71230515910716 | 239.1058352255696 | 239.25346088310212 |
+      | $$Z_{median}$$ | 238.71230515910716 | 239.1058352255696 | 239.25346088310212 |
 
-     Since **Median $$Z$$** increased by only 0.06% as our number of measurements $$n$$ increased from 20 to 30, we can conclude that:
+     Since $$Z_{median}$$ increased by only 0.06% as our number of measurements $$n$$ increased from 20 to 30, we can conclude that:
 
      $$Z = 239.25$$ $$\text{inches}$$ $$(\text{2.d.p.})$$
