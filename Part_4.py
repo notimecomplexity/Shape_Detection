@@ -274,9 +274,9 @@ def main():
             if not ret:
                 break
             g_ou, g_ov = detect_gray(frame)
-            # cv2.imshow("Detect Gray", g_ov) # debugging for detect_gray
+            # cv2.imshow("detect_gray()", g_ou) # debugging for detect_gray
             c_ou, c_ov = detect_colour(frame)
-            # cv2.imshow("Detect Colour", c_ov) # debugging for detect_colour
+            # cv2.imshow("detect_colour", c_ou) # debugging for detect_colour
             combined_edges = cv2.bitwise_or(g_ou, c_ou)
             final = find_com(frame, combined_edges)
             cv2.imshow("Video Analysis Stream", final)
