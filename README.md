@@ -3,6 +3,32 @@
 ## Table of Contents
 - [Task Overview](#task-overview)
 - [The Outline](#the-outline)
+- [The COM](#the-com)
+
+## The COM
+1. `cv2.findContours()` extracts boundaries from `combined_edges`, returning `contours`.
+- `contours`: a collection of boundaries, each an array of (x, y) pixel coordinates.
+2. For each `contour` in `contours`, we derive its **COM (Center of Mass)** with the formula
+
+   $$(x_c = \frac{\sum_i m_i x_i}{\sum_i m_i}, y_c = \frac{\sum_i m_i y_i}{\sum_i m_i})$$
+
+   where $$\sum_i m_i$$, $$\sum_i m_i x_i$$, and $$\sum_i m_i y_i$$ are calculated with `cv2.moments()`.
+3. In **Part 4**, we convert the units of $$x_c$$ and $$y_c$$ from pixels to inches due to transitioning from a 2D to 3D environment.
+4. To determine the z-coordinate $$Z$$ of each shape, equivalent to the distance from the camera to screen, we use the formula
+
+   $$Z \approx \frac{fR}{r}$$
+
+   where $$f$$ is the focal length of the camera in pixels $$(f_x \approx f_y)$$, $$R$$ is the radius of the circle in inches $$(R = 10)$$, and $$r$$ is the radius of the circle in pixels, which we will derive below.
+5. For each frame, we detected the `contour` with the best circularity $$(c_{best})$$, changing its outline to magenta.
+- Circularity measures how close a shape is to a circle, where $$0 \leq c \leq 1$$.
+6. Taking a random sample of 60 frames, we measured which shape with the best circularity.
+  
+    | Circle | Pentagon | Rectangle | Trapezoid | Triangle |
+    |----------|----------|----------|----------|----------|
+    | 0.81 | 0.75 | 0.69 | 0.66 | N.A. |
+  
+    As expected, the **Circle** had the highest $$c_{average}$$, so we set our $$c_{threshold} = 0.80$$.
+  7. For each frame, if $$c_{best} > c_{threshold}$$, we assume the contour with $$c_{best}$$ is the **Circle** and proceed with measuring $$r$$.
 
 ## Task Overview
 
@@ -39,4 +65,4 @@ To sketch our outlines, we combine two different edge detection functions with `
 
 - Sharp outlines are returned for every shape except the trapezoid, as its colour profile **(Black-White)** was completely undetected in **a** and **b**.
 
-Performing `cv2.bitwise_or()` on the results of `detect_gray()` and `detect_colour()` allows us to preserve our rough outline of the trapezoid while also improving the outline sharpness of the other four shapes.
+Performing `cv2.bitwise_or()` on the results of `detect_gray()` and `detect_colour()` allows us to preserve our rough outline of the trapezoid while also improving the outline sharpness of the other four shapes, returning a binary edge image `edges_combined`.
