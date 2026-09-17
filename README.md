@@ -4,6 +4,7 @@
 - [Task Overview](#task-overview)
 - [The Outline](#the-outline)
 - [The COM](#the-com)
+- [ROS 2](#ros-2)
 
 ## Task Overview
 
@@ -75,3 +76,64 @@ Performing `cv2.bitwise_or()` on the results of `detect_gray()` and `detect_colo
      Since $$Z_{median}$$ increased by only 0.06% as our number of measurements $$n$$ increased from 20 to 30, we can conclude that:
 
      $$Z = 239.25$$ $$\text{inches}$$ $$(\text{2.d.p.})$$
+
+## ROS 2
+
+Requires Ubuntu 24.04 with ROS 2 Jazzy installed. Run these commands inside Ubuntu.
+
+### Install dependencies
+
+```bash
+source /opt/ros/jazzy/setup.bash
+sudo apt update
+sudo apt install ros-dev-tools ros-jazzy-cv-bridge python3-opencv python3-numpy
+```
+
+### Build
+
+From the repository's root directory:
+
+```bash
+cd ros2_ws
+colcon build --symlink-install
+source install/setup.bash
+```
+
+### Run
+
+While still in `ros2_ws`, run:
+
+```bash
+ros2 launch pennair_vision shapes.launch.py \
+  video_path:="$(realpath ../Assets/Parts_3_4_5.mp4)" \
+  fps:=10.0 show_debug:=false loop:=true
+```
+
+This assumes `ros2_ws` and `Assets` are in the same parent directory. If you copied the workspace separately, replace the `video_path` value with the video's absolute path inside Ubuntu.
+
+Options:
+- `fps:=10.0`: publishes at 10 frames per second; `0.0` uses the video's FPS.
+- `show_debug:=true`: displays annotated frames; requires a graphical desktop.
+- `loop:=true`: repeats the video.
+
+Press **Ctrl+C** in the launch terminal to stop.
+
+### Inspect detections
+
+In a second Ubuntu terminal, from the repository root:
+
+```bash
+source /opt/ros/jazzy/setup.bash
+source ros2_ws/install/setup.bash
+ros2 topic list -t
+ros2 topic echo /shapes/detections --once
+```
+
+Topics:
+- `/camera/image_raw`: input video frames.
+- `/shapes/detections`: detected centers, outlines, and areas.
+- `/shapes/annotated`: annotated output frames.
+
+Centers are in meters in the camera optical frame: $$x_c$$ right, $$y_c$$ down, $$Z$$ forward. Outline points and image centroids are in pixels; their z-coordinate is 0. Detection IDs are local to each frame, not tracking IDs.
+
+Depth is fixed using the **Part 4** calibration, assuming all shapes lie on a stationary plane parallel to the image plane.
