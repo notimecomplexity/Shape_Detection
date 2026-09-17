@@ -3,3 +3,11 @@ __pycache__/
 .venv/
 
 .DS_Store
+
+# ROS 2 generated workspace files
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# ROS 2 README.md
+ros2_ws/README.md
